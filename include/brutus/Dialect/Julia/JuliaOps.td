@@ -10,6 +10,8 @@
 include "mlir/IR/OpBase.td"
 include "mlir/Interfaces/InferTypeOpInterface.td"
 include "mlir/Interfaces/SideEffectInterfaces.td"
+include "mlir/IR/FunctionInterfaces.td"
+include "mlir/IR/SymbolInterfaces.td"
 
 // Provide a definition of the 'JLIR' dialect in the ODS framework so that we
 // can define our operations.
@@ -193,7 +195,7 @@ def GotoIfNotOp : JLIR_Op<"gotoifnot", [AttrSizedOperandSegments, Terminator]> {
     ];
 }
 
-def ReturnOp : JLIR_Op<"return", [Terminator, HasParent<"FuncOp">]> {
+def ReturnOp : JLIR_Op<"return", [Terminator, HasParent<"func::FuncOp">]> {
     let summary = "return operation";
     let description = [{
         The "return" operation represents a return operation within a function.
@@ -213,7 +215,7 @@ def ReturnOp : JLIR_Op<"return", [Terminator, HasParent<"FuncOp">]> {
     let arguments = (ins JLIR_JuliaType:$input);
 
     // Invoke a static verify method to verify this return operation.
-    let verifier = [{ return ::verify(*this); }];
+    let hasVerifier = 1;
 }
 
 def PiOp : JLIR_Op<"pi", [NoSideEffect]> {

@@ -5,6 +5,10 @@
 #include "mlir/IR/Builders.h"
 #include "mlir/IR/DialectImplementation.h"
 #include "mlir/IR/Types.h"
+#include "mlir/IR/BuiltinTypes.h"
+#include "mlir/IR/FunctionImplementation.h"
+#include "mlir/IR/OpImplementation.h"
+#include "mlir/Dialect/Func/IR/FuncOps.h"
 
 using namespace mlir;
 using namespace mlir::jlir;
@@ -93,19 +97,20 @@ void InvokeOp::build(mlir::OpBuilder &builder, mlir::OperationState &state,
 //===----------------------------------------------------------------------===//
 // ReturnOp
 
-static mlir::LogicalResult verify(ReturnOp op) {
+mlir::LogicalResult ReturnOp::verify() {
     // We know that the parent operation is a function, because of the 'HasParent'
     // trait attached to the operation definition.
-    auto function = cast<FuncOp>(op->getParentOp());
+    auto function = cast<func::FuncOp>((*this)->getParentOp());
 
-    const auto &results = function.getType().getResults();
+    const auto &results = function.getFunctionType().getResults();
+    
     if (results.size() != 1)
         return function.emitOpError() << "does not return exactly one value";
 
     // check that result type of function matches the operand type
-    if (results.front() != op.getOperand().getType())
-        return op.emitError() << "type of return operand ("
-                              << op.getOperand().getType()
+    if (results.front() != getOperand().getType())
+        return emitError() << "type of return operand ("
+                              << getOperand().getType()
                               << ") doesn't match function result type ("
                               << results.front() << ")";
 

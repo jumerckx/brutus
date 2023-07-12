@@ -3,8 +3,11 @@
 
 #include "mlir/IR/Dialect.h"
 #include "mlir/IR/Builders.h"
-#include "mlir/IR/BuiltinOps.h"
+#include "mlir/IR/FunctionInterfaces.h"
+#include "mlir/IR/SymbolTable.h"
+#include "mlir/Interfaces/CallInterfaces.h"
 #include "mlir/Interfaces/SideEffectInterfaces.h"
+#include "mlir/Dialect/Func/IR/FuncOps.h"
 
 #include "julia.h"
 #include "brutus/brutus_internal.h"

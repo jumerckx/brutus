@@ -1,7 +1,7 @@
 add_mlir_library(
   BRUTUSCodegen
   Brutus.cpp
-  Codegen.cpp
+  # Codegen.cpp
 
   ADDITIONAL_HEADER_DIRS
   ${BRUTUS_INCLUDE_DIR}/JuliaOps
@@ -10,12 +10,9 @@ add_mlir_library(
   MLIR
   MLIRCAPIDebug
   MLIRCAPIIR
-  MLIRCAPIRegistration  # TODO: See about dis-aggregating
+  MLIRCAPIRegisterEverything
 
   # Dialects
-  MLIRCAPILinalg  # TODO: Remove when above is removed.
-  MLIRCAPISparseTensor  # TODO: Remove when above is removed.
-  MLIRCAPIStandard
   MLIRExecutionEngine
   MLIRTargetLLVMIRExport
 

@@ -9,7 +9,7 @@
 #ifndef BRUTUS_C_DIALECTS_H
 #define BRUTUS_C_DIALECTS_H
 
-#include "mlir-c/Registration.h"
+#include "mlir/CAPI/Registration.h"
 
 #ifdef __cplusplus
 extern "C" {

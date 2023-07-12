@@ -48,7 +48,7 @@ struct LowerIntrinsicCallPattern : public OpRewritePattern<CallOp> {
         OperationState state = OperationState(op.getLoc(), name);
         state.addOperands(op.arguments());
         state.addTypes(op.getType());
-        Operation *newOp = rewriter.createOperation(state);
+        Operation *newOp = rewriter.create(state);
         // Replace the value of the old Op with the Result of the new op
         rewriter.replaceOp(op, newOp->getResult(0));
     }
@@ -85,7 +85,7 @@ struct LowerBuiltinCallPattern : public OpRewritePattern<CallOp> {
         OperationState state = OperationState(op.getLoc(), name);
         state.addOperands(op.arguments());
         state.addTypes(op.getType());
-        Operation *newOp = rewriter.createOperation(state);
+        Operation *newOp = rewriter.create(state);
         // Replace the value of the old Op with the Result of the new op
         rewriter.replaceOp(op, newOp->getResult(0));
     }

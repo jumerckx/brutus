@@ -28,9 +28,14 @@ add_lit_testsuite(check-brutus "Running the brutus tests"
   ${BRUTUS_TEST_DEPENDS}
   ARGS
   -a
+  -D FileCheck="/home/jumerckx/julia/build/debug/usr/tools/FileCheck"
+  -D count="/home/jumerckx/julia/build/debug/usr/tools/count"
+  -D not="/home/jumerckx/julia/build/debug/usr/tools/not"
   )
 
 add_lit_testsuites(BRUTUS
   ${CMAKE_CURRENT_SOURCE_DIR}
   DEPENDS ${BRUTUS_TEST_DEPENDS}
   )
+
+add_subdirectory(CAPI)

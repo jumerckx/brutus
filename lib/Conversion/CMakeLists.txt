@@ -1,2 +1,2 @@
 add_subdirectory(JLIRToLLVM)
-add_subdirectory(JLIRToStandard)
+# add_subdirectory(JLIRToStandard)
