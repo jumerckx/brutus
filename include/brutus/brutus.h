@@ -22,6 +22,10 @@
 extern "C"
 {
 #endif
+    MlirType brutus_get_jlirtype(MlirContext context, jl_datatype_t *datatype);
+    jl_datatype_t *brutus_get_julia_type(MlirType v);
+    MlirAttribute brutus_get_jlirattr(MlirContext context, jl_value_t *value);
+
 
     typedef void (*ExecutionEngineFPtrResult)(void **);
 

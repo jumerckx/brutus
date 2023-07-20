@@ -8,6 +8,8 @@ add_mlir_aggregate(StandaloneCAPITestLib
   ${Julia_LIBRARY}
   ${Julia_Internal_LIBRARY}
   brutus
+  obj.BRUTUSCodegen
+ 
   EMBED_LIBS
   MLIRCAPIIR
   MLIRCAPIRegisterEverything
@@ -31,4 +33,6 @@ add_mlir_aggregate(StandaloneCAPITestLib
   MLIRCAPITensor
   MLIRCAPIQuant
   MLIRCAPIPDL
+
+  BRUTUSCodegen
 )

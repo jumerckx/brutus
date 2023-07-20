@@ -1,8 +1,12 @@
 #include "brutus/brutus.h"
 #include "brutus/brutus_internal.h"
 #include "brutus/Dialect/Julia/JuliaOps.h"
+#include "mlir/CAPI/IR.h"
 
 #include "mlir/InitAllDialects.h"
+
+using namespace mlir;
+using namespace mlir::jlir;
 
 extern "C"
 {
@@ -35,4 +39,27 @@ extern "C"
         registry.insert<mlir::jlir::JLIRDialect>();
         mlir::registerAllDialects(registry);
     }
+
+    MlirType brutus_get_jlirtype(MlirContext Context,
+                                 jl_datatype_t *datatype)
+    {
+        mlir::MLIRContext *ctx = unwrap(Context);
+        mlir::Type type = JuliaType::get(ctx, datatype);
+        return wrap(type);
+    };
+
+    jl_datatype_t *brutus_get_julia_type(MlirType v)
+    {
+        mlir::Type type = unwrap(v);
+        return (jl_datatype_t *)type.cast<JuliaType>().getDatatype();
+    }
+
+    MlirAttribute brutus_get_jlirattr(MlirContext Context,
+                                      jl_value_t *value)
+    {
+        mlir::MLIRContext *ctx = unwrap(Context);
+        mlir::Attribute val = JuliaValueAttr::get(ctx, value);
+        return wrap(val);
+    };
+
 } // extern "C"
