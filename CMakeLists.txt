@@ -29,9 +29,9 @@ include(TableGen)
 include(AddLLVM)
 include(AddMLIR)
 include(HandleLLVMOptions)
-include(FindJulia)
+# include(FindJulia)
 
-find_package(Julia REQUIRED)
+# find_package(Julia REQUIRED)
 # TODO: Check that Julia_LLVM_VERSION and this LLVM_VERSION match
 
 set(LLVM_TOOLS_BINARY_DIR "${LLVM_INSTALL_PREFIX}/${LLVM_TOOLS_INSTALL_DIR}")

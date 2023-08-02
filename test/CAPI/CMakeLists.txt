@@ -5,10 +5,10 @@
 add_mlir_aggregate(StandaloneCAPITestLib
   SHARED
   PUBLIC_LIBS
-  ${Julia_LIBRARY}
-  ${Julia_Internal_LIBRARY}
-  brutus
-  obj.BRUTUSCodegen
+  # ${Julia_LIBRARY}
+  # ${Julia_Internal_LIBRARY}
+  # brutus
+  # obj.BRUTUSCodegen
  
   EMBED_LIBS
   MLIRCAPIIR
@@ -34,5 +34,5 @@ add_mlir_aggregate(StandaloneCAPITestLib
   MLIRCAPIQuant
   MLIRCAPIPDL
 
-  BRUTUSCodegen
+  # BRUTUSCodegen
 )
