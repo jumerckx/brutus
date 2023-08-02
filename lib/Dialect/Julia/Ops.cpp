@@ -61,8 +61,8 @@ void ConstantOp::build(mlir::OpBuilder &builder, mlir::OperationState &state, jl
     state.addTypes(JuliaType::get(builder.getContext(), type));
 }
 
-mlir::OpFoldResult ConstantOp::fold(llvm::ArrayRef<mlir::Attribute> operands) {
-    return valueAttr();
+mlir::OpFoldResult ConstantOp::fold(FoldAdaptor) {
+    return getValueAttr();
 }
 
 void PiOp::build(mlir::OpBuilder &builder, mlir::OperationState &state,

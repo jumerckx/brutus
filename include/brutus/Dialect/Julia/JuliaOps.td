@@ -52,14 +52,14 @@ class JLIR_IntrinsicBuiltinOp<string mnemonic, list<Trait> traits = []> :
 }
 
 class JLIR_ArithmeticOp<string mnemonic, list<Trait> traits = []>:
-    JLIR_IntrinsicBuiltinOp<mnemonic, !listconcat([NoSideEffect, SameOperandsAndResultType], traits)> {
+    JLIR_IntrinsicBuiltinOp<mnemonic, !listconcat([Pure, SameOperandsAndResultType], traits)> {
 
     let arguments = (ins JLIR_JuliaType:$rhs, JLIR_JuliaType:$lhs);
     let results = (outs JLIR_JuliaType);
 }
 
 class JLIR_UnaryArithmeticOp<string mnemonic, list<Trait> traits = []>:
-    JLIR_IntrinsicBuiltinOp<mnemonic, !listconcat([NoSideEffect, SameOperandsAndResultType], traits)> {
+    JLIR_IntrinsicBuiltinOp<mnemonic, !listconcat([Pure, SameOperandsAndResultType], traits)> {
 
     let arguments = (ins JLIR_JuliaType:$arg);
     let results = (outs JLIR_JuliaType);
@@ -96,7 +96,7 @@ def UndefOp : JLIR_Op<"undef"> {
     ];
 }
 
-def ConstantOp : JLIR_Op<"constant", [NoSideEffect]> {
+def ConstantOp : JLIR_Op<"constant", [Pure]> {
     let summary = "constant generating operation";
     let description = [{
         TODO
@@ -218,7 +218,7 @@ def ReturnOp : JLIR_Op<"return", [Terminator, HasParent<"func::FuncOp">]> {
     let hasVerifier = 1;
 }
 
-def PiOp : JLIR_Op<"pi", [NoSideEffect]> {
+def PiOp : JLIR_Op<"pi", [Pure]> {
     let summary = "pi operation";
     let description = [{
         TODO
@@ -231,7 +231,7 @@ def PiOp : JLIR_Op<"pi", [NoSideEffect]> {
     ];
 }
 
-def ConvertStdOp : JLIR_Op<"convertstd", [NoSideEffect]> {
+def ConvertStdOp : JLIR_Op<"convertstd", [Pure]> {
     let summary = "JLIR-Standard type conversion operation";
     let description = [{}];
 
@@ -241,7 +241,7 @@ def ConvertStdOp : JLIR_Op<"convertstd", [NoSideEffect]> {
     let hasCanonicalizer = 1;
 }
 
-def ArrayToMemRefOp : JLIR_Op<"arraytomemref", [NoSideEffect]> {
+def ArrayToMemRefOp : JLIR_Op<"arraytomemref", [Pure]> {
     let summary = "Array to MemRef conversion operation";
     let description = [{
         TODO
@@ -252,7 +252,7 @@ def ArrayToMemRefOp : JLIR_Op<"arraytomemref", [NoSideEffect]> {
 }
 
 /*  wrap and unwrap */
-def JLIR_Intrinsic_bitcast : JLIR_IntrinsicBuiltinOp<"bitcast", [NoSideEffect]>;
+def JLIR_Intrinsic_bitcast : JLIR_IntrinsicBuiltinOp<"bitcast", [Pure]>;
 
 /*  arithmetic */
 def JLIR_Intrinsic_neg_int   : JLIR_UnaryArithmeticOp<"neg_int">;
@@ -272,8 +272,8 @@ def JLIR_Intrinsic_mul_float : JLIR_ArithmeticOp<"mul_float">;
 def JLIR_Intrinsic_div_float : JLIR_ArithmeticOp<"div_float">;
 def JLIR_Intrinsic_rem_float : JLIR_ArithmeticOp<"rem_float">;
 // 3-ary arithmetic ops
-def JLIR_Intrinsic_fma_float    : JLIR_IntrinsicBuiltinOp<"fma_float", [NoSideEffect]>; // FIXME: SameOperandsAndResultType
-def JLIR_Intrinsic_muladd_float : JLIR_IntrinsicBuiltinOp<"muladd_float", [NoSideEffect]>; // FIXME: SameOperandsAndResultType
+def JLIR_Intrinsic_fma_float    : JLIR_IntrinsicBuiltinOp<"fma_float", [Pure]>; // FIXME: SameOperandsAndResultType
+def JLIR_Intrinsic_muladd_float : JLIR_IntrinsicBuiltinOp<"muladd_float", [Pure]>; // FIXME: SameOperandsAndResultType
 //    /*  fast arithmetic */ \
 //    ALIAS(neg_float_fast, neg_float) \
 //    ALIAS(add_float_fast, add_float) \
