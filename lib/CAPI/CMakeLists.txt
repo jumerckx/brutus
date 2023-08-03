@@ -1,7 +1,9 @@
 add_mlir_public_c_api_library(BRUTUSCAPI
   Beaver.cpp
+  SHARED
   LINK_LIBS PUBLIC
-  MLIRIR
+  MLIRDialectUtils
+  MLIRCAPIIR
   MLIRTransforms
   MLIRRewrite
 )

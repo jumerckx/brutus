@@ -6,7 +6,7 @@ rm -rf $rootpath/build
 mkdir $rootpath/build && cd $rootpath/build
 
 cmake .. -G Ninja \
-    -DMLIR_DIR="/storage/jumerckx/llvm_build/lib/cmake/mlir" \
+    -DCMAKE_INSTALL_PREFIX="/storage/jumerckx/llvm_build" \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo
 ninja
 
