@@ -1,5 +1,4 @@
 // include otherwise on linux it can't find the symbol
-#define _GLIBCXX_USE_CXX11_ABI 0
 #include "mlir/CAPI/Pass.h"
 #include "mlir/CAPI/Registration.h"
 
@@ -35,11 +34,11 @@ MLIR_CAPI_EXPORTED MlirLogicalResult beaverApplyOwnedPatternSetOnRegion(
                                            frozen));
 }
 
-// MLIR_CAPI_EXPORTED MlirLogicalResult beaverApplyOwnedPatternSetOnOperation(
-//     MlirOperation op, MlirRewritePatternSet patternList) {
-//   return wrap(applyPatternsAndFoldGreedily(unwrap(op),
-//                                            std::move(*unwrap(patternList))));
-// }
+MLIR_CAPI_EXPORTED MlirLogicalResult beaverApplyOwnedPatternSetOnOperation(
+    MlirOperation op, MlirRewritePatternSet patternList) {
+  return wrap(applyPatternsAndFoldGreedily(unwrap(op),
+                                           std::move(*unwrap(patternList))));
+}
 
 MLIR_CAPI_EXPORTED MlirStringRef beaverPassGetArgument(MlirPass pass) {
   auto argument = unwrap(pass)->getArgument();

@@ -4,6 +4,8 @@ add_mlir_public_c_api_library(BRUTUSCAPI
   LINK_LIBS PUBLIC
   MLIRJulia
   MLIRIR
+  MLIRDialectUtils
+  MLIRCAPIIR
   MLIRTransforms
   MLIRRewrite
 )
